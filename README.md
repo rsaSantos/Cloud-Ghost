@@ -28,3 +28,10 @@ Cloud Computing Applications and Services project. Master of Software Engineerin
   - ghost_port: identifies the port of the application.
 
 Reminder: Shutdown the cluster when not in use to avoid incurring in costs.
+
+Shutdown virtual machines in the cluster:
+
+```bash
+$ gcloud compute instances stop gke-ascn-cluster-default-pool-91a8adde-sr1x
+$ gcloud compute instances stop gke-ascn-cluster-default-pool-91a8adde-vvm5
+```
