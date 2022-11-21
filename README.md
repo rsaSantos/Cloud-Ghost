@@ -32,6 +32,5 @@ Reminder: Shutdown the cluster when not in use to avoid incurring in costs.
 Shutdown virtual machines in the cluster:
 
 ```bash
-$ gcloud compute instances stop gke-ascn-cluster-default-pool-91a8adde-sr1x
-$ gcloud compute instances stop gke-ascn-cluster-default-pool-91a8adde-vvm5
+$ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0
 ```
