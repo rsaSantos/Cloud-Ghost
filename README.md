@@ -32,5 +32,5 @@ Reminder: Shutdown the cluster when not in use to avoid incurring in costs.
 Shutdown virtual machines in the cluster:
 
 ```bash
-$ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0
+$ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
 ```
