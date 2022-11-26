@@ -1,0 +1,32 @@
+---
+- name: Create a namespace
+  k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: ghost_nm
+        labels:
+          app: ghost_nm
+  register: namespace
+  until: 'namespace is not failed'
+  delay: 10
+  retries: 3
+
+- name: Create a pod.
+  k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Pod
+      metadata:
+        name: '{{ app }}'
+        namespace: ghost_nm
+        labels:
+          app: '{{ app }}'
+      spec:
+        containers:
+          - name: '{{ app }}'
+            image: '{{ image }}'
+            image_pull_policy: Always
