@@ -12,35 +12,51 @@
   kubernetes.core.k8s:
     state: present
     definition:
+      metadata:
+        name: mysql-deployment
+        namespace: '{{ mysql_namespace }}'
+        labels:
+          app: '{{ app }}'
+          tier: database
       api_version: v1
       kind: Deployment
-      name: mysql-deployment
-      namespace: '{{ mysql_namespace }}'
       spec:
-        containers:
-          - name: '{{ app }}'
-            image: '{{ image }}'
-            ports:
-              - containerPort: '{{ mysql_port }}'
-            env:
-              - name: MYSQL_ROOT_PASSWORD
-                value: '{{ mysql_root_password }}'
-            volumeMounts:
+        selector:
+          matchLabels:
+            app: mysql
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: mysql
+              tier: database
+          spec:
+            containers:
+              - name: '{{ app }}'
+                image: '{{ image }}'
+                ports:
+                  - containerPort: '{{ mysql_port }}'
+                env:
+                  - name: MYSQL_ROOT_PASSWORD
+                    value: '{{ mysql_root_password }}'
+                volumeMounts:
+                  - name: mysql-persistent-storage
+                    mountPath: /var/lib/mysql
+            volumes:
               - name: mysql-persistent-storage
-                mountPath: /var/lib/mysql
-        volumes:
-          - name: mysql-persistent-storage
-            persistentVolumeClaim:
-              claimName: mysql-pv-claim
+                persistentVolumeClaim:
+                  claimName: mysql-pv-claim
 
 - name: Create a persistent volume claim for the MySQL deployment
   kubernetes.core.k8s:
     state: present
     definition:
+      metadata:
+        name: mysql-pvm
+        namespace: '{{ mysql_namespace }}'
       api_version: v1
       kind: PersistentVolumeClaim
-      name: mysql-pv-claim
-      namespace: '{{ mysql_namespace }}'
       spec:
         accessModes:
           - ReadWriteOnce
@@ -55,8 +71,12 @@
     definition:
       api_version: v1
       kind: Service
-      name: mysql-service
-      namespace: '{{ mysql_namespace }}'
+      metadata:
+        name: mysql-service
+        namespace: '{{ mysql_namespace }}'
+        labels:
+          app: '{{ app }}'
+          tier: database
       spec:
         selector:
           app: '{{ app }}'

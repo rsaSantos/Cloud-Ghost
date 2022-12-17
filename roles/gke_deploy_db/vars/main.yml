@@ -1,5 +1,5 @@
 ---
-mysql_namespace: mysql_ns
+mysql_namespace: mysql-ns
 mysql_root_password: password
 app: mysql
 image: latest

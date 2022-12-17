@@ -5,4 +5,4 @@
   gather_facts: false
   roles:
     - gke_deploy_db
-    - gke_deploy_ghost
+    # - gke_deploy_ghost
