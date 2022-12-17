@@ -1,0 +1,6 @@
+---
+mysql_namespace: mysql_ns
+mysql_root_password: password
+app: mysql
+image: latest
+mysql_port: 3306

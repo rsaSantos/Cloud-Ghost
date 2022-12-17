@@ -1,0 +1,66 @@
+---
+- name: Create a namespace for the MySQL deployment
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: '{{ mysql_namespace }}'
+
+- name: Deploy MySQL on the cluster
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      api_version: v1
+      kind: Deployment
+      name: mysql-deployment
+      namespace: '{{ mysql_namespace }}'
+      spec:
+        containers:
+          - name: '{{ app }}'
+            image: '{{ image }}'
+            ports:
+              - containerPort: '{{ mysql_port }}'
+            env:
+              - name: MYSQL_ROOT_PASSWORD
+                value: '{{ mysql_root_password }}'
+            volumeMounts:
+              - name: mysql-persistent-storage
+                mountPath: /var/lib/mysql
+        volumes:
+          - name: mysql-persistent-storage
+            persistentVolumeClaim:
+              claimName: mysql-pv-claim
+
+- name: Create a persistent volume claim for the MySQL deployment
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      api_version: v1
+      kind: PersistentVolumeClaim
+      name: mysql-pv-claim
+      namespace: '{{ mysql_namespace }}'
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 10Gi
+
+- name: Create a service for the MySQL deployment
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      api_version: v1
+      kind: Service
+      name: mysql-service
+      namespace: '{{ mysql_namespace }}'
+      spec:
+        selector:
+          app: '{{ app }}'
+        ports:
+          - port: '{{ mysql_port }}'
+            targetPort: '{{ mysql_port }}'
+        type: LoadBalancer
