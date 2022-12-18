@@ -1,4 +1,0 @@
-# Undeploy Ghost variables
-
-# Delete Persistent volume for the Ghost deployment ?
-remome_ghost_volume: "{{ lookup('env', 'remome_ghost_volume') }}"
