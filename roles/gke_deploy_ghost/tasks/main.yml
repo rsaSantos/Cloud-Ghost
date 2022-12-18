@@ -1,34 +1,64 @@
 ---
 - name: Create namespace for Ghost application
-  k8s:
-    api_version: v1
-    kind: Namespace
-    name: '{{ghost_namespace}}'
+  kubernetes.core.k8s:
     state: present
+    definition:
+      api_version: v1
+      kind: Namespace
+      metadata:
+        name: '{{ghost_namespace}}'
 
 - name: Deploy ghost application.
-  k8s:
-    api_version: apps/v1
-    kind: Deployment
-    name: '{{ghost_deploy_name}}'
-    namespace: '{{ghost_namespace}}'
+  kubernetes.core.k8s:
     state: present
-    container:
-      - name: ghost
-        image: ghost:5.14.1
-        ports:
-          - containerPort: 2368
+    definition:
+      metadata:
+        name: '{{ghost_deploy_name}}'
+        namespace: '{{ghost_namespace}}'
+      api_version: apps/v1
+      kind: Deployment
+      spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: '{{ app }}'
+        strategy:
+          type: Recreate
+        template:
+          metadata:
+            labels:
+              app: '{{ app }}'
+          spec:
+            containers:
+              - name: '{{ app }}'
+                image: '{{ image }}'
+                env: # The variables below could be set on a ConfigMap object
+                  - name: database__connection__host
+                    value: '{{ db_service_name }}.{{ db_namespace }}'
+                  - name: database__connection__database
+                    value: '{{ app_db_name }}'
+                  - name: database__connection__user
+                    value: '{{ app_db_user }}'
+                  - name: database__connection__password
+                    value: '{{ app_db_pass }}'
+                    url: http://localhost:{{ db_port }}
+                ports:
+                  - containerPort: '{{ ghost_port }}'
 
 - name: Create Service for Ghost application
-  k8s:
-    api_version: v1
-    kind: Service
-    name: ghost
-    namespace: '{{ghost_namespace}}'
+  kubernetes.core.k8s:
     state: present
-    spec:
-      selector:
-        app: ghost
-      ports:
-        - port: 80
-          target_port: 2368
+    definition:
+      metadata:
+        name: ghost-service
+        namespace: '{{ ghost_namespace }}'
+      api_version: v1
+      kind: Service
+      spec:
+        type: LoadBalancer
+        selector:
+          app: ghost
+        ports:
+          - protocol: TCP
+            port: '{{ ghost_port }}'
+            target_port: '{{ ghost_port }}'
