@@ -15,9 +15,6 @@
       metadata:
         name: mysql-deployment
         namespace: '{{ mysql_namespace }}'
-        labels:
-          app: '{{ app }}'
-          tier: database
       api_version: v1
       kind: Deployment
       spec:
@@ -30,7 +27,6 @@
           metadata:
             labels:
               app: '{{ app }}'
-              tier: database
           spec:
             containers:
               - name: '{{ app }}'
@@ -46,7 +42,7 @@
             volumes:
               - name: mysql-persistent-storage
                 persistentVolumeClaim:
-                  claimName: mysql-pv-claim
+                  claimName: mysql-pvm
 
 - name: Create a persistent volume claim for the MySQL deployment
   kubernetes.core.k8s:
@@ -74,13 +70,10 @@
       metadata:
         name: mysql-service
         namespace: '{{ mysql_namespace }}'
-        labels:
-          app: '{{ app }}'
-          tier: database
       spec:
+        type: ClusterIP
         selector:
           app: '{{ app }}'
         ports:
           - port: '{{ mysql_port }}'
             targetPort: '{{ mysql_port }}'
-        type: LoadBalancer

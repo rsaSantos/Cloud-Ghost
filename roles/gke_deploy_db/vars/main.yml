@@ -2,5 +2,5 @@
 mysql_namespace: mysql-ns
 mysql_root_password: password
 app: mysql
-image: latest
+image: mysql:latest
 mysql_port: 3306
