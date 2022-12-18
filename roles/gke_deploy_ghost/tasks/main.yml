@@ -3,15 +3,15 @@
   k8s:
     api_version: v1
     kind: Namespace
-    name: ghost
+    name: '{{ghost_namespace}}'
     state: present
 
 - name: Deploy ghost application.
   k8s:
     api_version: apps/v1
     kind: Deployment
-    name: ghost
-    namespace: ghost
+    name: '{{ghost_deploy_name}}'
+    namespace: '{{ghost_namespace}}'
     state: present
     container:
       - name: ghost
@@ -24,7 +24,7 @@
     api_version: v1
     kind: Service
     name: ghost
-    namespace: ghost
+    namespace: '{{ghost_namespace}}'
     state: present
     spec:
       selector:

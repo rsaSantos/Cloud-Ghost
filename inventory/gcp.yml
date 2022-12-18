@@ -16,5 +16,10 @@ all:
     ghost_ip: <GHOST_SERVICE_IP> # Needs to be updated
     ghost_port: <GHOST_PORT> # Needs to be updated
 
-    # Additional variables
-    # ...
+    # Database variables
+    db_namespace: mysql-ns
+    db_deploy_name: mysql-deployment
+
+    # Ghost variables
+    ghost_namespace: ghost-ns
+    ghost_deploy_name: ghost-deployment

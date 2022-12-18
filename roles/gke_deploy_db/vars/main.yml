@@ -1,5 +1,4 @@
 ---
-mysql_namespace: mysql-ns
 mysql_root_password: password
 app: mysql
 app_db_name: ghostdb

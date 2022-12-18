@@ -1,0 +1,2 @@
+- name: Undeploy Ghost Deployment
+  shell: kubectl delete deployment '{{ghost_deploy_name}}' -n '{{ghost_namespace}}'

@@ -1,0 +1,2 @@
+- name: Undeploy MySQL Deployment
+  shell: kubectl delete deployment '{{db_deploy_name}}' -n '{{db_namespace}}'

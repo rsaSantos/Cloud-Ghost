@@ -6,15 +6,15 @@
       apiVersion: v1
       kind: Namespace
       metadata:
-        name: '{{ mysql_namespace }}'
+        name: '{{db_namespace}}'
 
 - name: Deploy MySQL on the cluster
   kubernetes.core.k8s:
     state: present
     definition:
       metadata:
-        name: mysql-deployment
-        namespace: '{{ mysql_namespace }}'
+        name: '{{db_deploy_name}}'
+        namespace: '{{db_namespace}}'
       api_version: v1
       kind: Deployment
       spec:
@@ -56,7 +56,7 @@
     definition:
       metadata:
         name: mysql-pvm
-        namespace: '{{ mysql_namespace }}'
+        namespace: '{{db_namespace}}'
       api_version: v1
       kind: PersistentVolumeClaim
       spec:
@@ -75,7 +75,7 @@
       kind: Service
       metadata:
         name: mysql-service
-        namespace: '{{ mysql_namespace }}'
+        namespace: '{{db_namespace}}'
       spec:
         type: ClusterIP
         selector:
