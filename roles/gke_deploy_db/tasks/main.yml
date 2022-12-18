@@ -29,7 +29,7 @@
         template:
           metadata:
             labels:
-              app: mysql
+              app: '{{ app }}'
               tier: database
           spec:
             containers:
