@@ -35,6 +35,7 @@ Shutdown virtual machines in the cluster:
 $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
 ```
 
+ansible-playbook deploy-ghost.yml
+
 kubectl get pods -n <namespace>
 kubectl exec -it <pod-name> -n <namespace> -- mysql -u root -p
-ansible-playbook deploy-ghost.yml
