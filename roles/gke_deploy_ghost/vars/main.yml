@@ -1,0 +1,3 @@
+---
+app: ghost
+image: ghost:5.14.1
