@@ -29,14 +29,27 @@ Cloud Computing Applications and Services project. Master of Software Engineerin
 
 Reminder: Shutdown the cluster when not in use to avoid incurring in costs.
 
-Shutdown virtual machines in the cluster:
+## Start and Shutdown virtual machines in the cluster:
 
-```bash
+$ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes <n> --zone europe-southwest1-a
+
 $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
-```
 
-ansible-playbook deploy-ghost.yml -i inventory/gcp.yml
-ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
-kubectl get pods -n <namespace>
-kubectl exec -it <pod-name> -n <namespace> -- mysql -u root -p
+
+## Run playbooks:
+$ ansible-playbook deploy-ghost.yml -i inventory/gcp.yml
+
+$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
+
+$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_db_volume=true"
+
+$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_ghost_volume=true"
+
+$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_db_volume=true remome_ghost_volume=true"
+
+
+## Other commands:
+$ kubectl get pods -n <namespace>
+
+$ kubectl exec -it <pod-name> -n <namespace> -- mysql -u root -p
