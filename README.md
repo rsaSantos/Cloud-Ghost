@@ -36,7 +36,6 @@ $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-n
 $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
 
 
-
 ## Run playbooks:
 $ ansible-playbook deploy-ghost.yml -i inventory/gcp.yml
 
