@@ -2,5 +2,8 @@
 mysql_namespace: mysql-ns
 mysql_root_password: password
 app: mysql
+app_db_name: ghostdb
+app_db_user: ghostuser
+app_db_pass: pass
 image: mysql:latest
 mysql_port: 3306

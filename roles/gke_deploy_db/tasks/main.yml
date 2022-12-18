@@ -36,6 +36,12 @@
                 env:
                   - name: MYSQL_ROOT_PASSWORD
                     value: '{{ mysql_root_password }}'
+                  - name: MYSQL_DATABASE
+                    value: '{{ app_db_name }}'
+                  - name: MYSQL_USER
+                    value: '{{ app_db_user }}'
+                  - name: MYSQL_PASSWORD
+                    value: '{{ app_db_pass }}' # Use Secret object in real usage
                 volumeMounts:
                   - name: mysql-persistent-storage
                     mountPath: /var/lib/mysql
