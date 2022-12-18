@@ -13,13 +13,19 @@ all:
     gcp_initial_node_count: 2 # Number of nodes to create. Can be changed if necessary
 
     # APP variables
-    ghost_ip: <GHOST_SERVICE_IP> # Needs to be updated
-    ghost_port: <GHOST_PORT> # Needs to be updated
+    ghost_ip: 34.175.205.231 # Needs to be updated
+    ghost_port: 2368
 
     # Database variables
     db_namespace: db-ns
     db_deploy_name: db-deployment
     db_pvc_name: db-pvc
+    db_service_name: db-service
+    db_port: 3306
+
+    app_db_name: ghostdb
+    app_db_user: ghostuser
+    app_db_pass: 456iamuser
 
     # Ghost variables
     ghost_namespace: ghost-ns
