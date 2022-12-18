@@ -1,2 +1,7 @@
 - name: Undeploy Ghost Deployment
   shell: kubectl delete deployment '{{ghost_deploy_name}}' -n '{{ghost_namespace}}'
+
+- name: Remove Persistent Volume on Ghost Deployment
+  shell: kubectl delete pvc '{{ghost_pvc_name}}' -n '{{ghost_namespace}}'
+  when: remome_ghost_volume == "true"
+

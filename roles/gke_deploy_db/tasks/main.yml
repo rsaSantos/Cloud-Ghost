@@ -48,14 +48,14 @@
             volumes:
               - name: mysql-persistent-storage
                 persistentVolumeClaim:
-                  claimName: mysql-pvm
+                  claimName: '{{ db_pvc_name }}'
 
 - name: Create a persistent volume claim for the MySQL deployment
   kubernetes.core.k8s:
     state: present
     definition:
       metadata:
-        name: mysql-pvm
+        name: '{{ db_pvc_name }}'
         namespace: '{{db_namespace}}'
       api_version: v1
       kind: PersistentVolumeClaim

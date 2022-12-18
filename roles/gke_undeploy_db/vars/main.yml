@@ -1,0 +1,4 @@
+# Undeploy Database variables
+
+# Delete Persistent volume for the Database deployment ?
+remome_db_volume: "{{ lookup('env', 'remome_db_volume') }}"

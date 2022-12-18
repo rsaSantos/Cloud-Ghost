@@ -17,9 +17,11 @@ all:
     ghost_port: <GHOST_PORT> # Needs to be updated
 
     # Database variables
-    db_namespace: mysql-ns
-    db_deploy_name: mysql-deployment
+    db_namespace: db-ns
+    db_deploy_name: db-deployment
+    db_pvc_name: db-pvc
 
     # Ghost variables
     ghost_namespace: ghost-ns
     ghost_deploy_name: ghost-deployment
+    ghost_pvc_name: ghost-pvc
