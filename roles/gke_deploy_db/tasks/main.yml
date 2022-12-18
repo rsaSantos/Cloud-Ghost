@@ -20,7 +20,7 @@
       spec:
         selector:
           matchLabels:
-            app: mysql
+            app: '{{ app }}'
         strategy:
           type: Recreate
         template:
@@ -32,7 +32,7 @@
               - name: '{{ app }}'
                 image: '{{ image }}'
                 ports:
-                  - containerPort: '{{ mysql_port }}'
+                  - containerPort: '{{ db_port }}'
                 env:
                   - name: MYSQL_ROOT_PASSWORD
                     value: '{{ mysql_root_password }}'
@@ -74,12 +74,12 @@
       api_version: v1
       kind: Service
       metadata:
-        name: mysql-service
-        namespace: '{{db_namespace}}'
+        name: '{{ db_service_name }}'
+        namespace: '{{ db_namespace }}'
       spec:
-        type: ClusterIP
+        type: LoadBalancer
         selector:
           app: '{{ app }}'
         ports:
-          - port: '{{ mysql_port }}'
-            targetPort: '{{ mysql_port }}'
+          - port: '{{ db_port }}'
+            targetPort: '{{ db_port }}'
