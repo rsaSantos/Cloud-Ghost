@@ -1,32 +1,34 @@
 ---
-- name: Create a namespace
+- name: Create namespace for Ghost application
   k8s:
+    api_version: v1
+    kind: Namespace
+    name: ghost
     state: present
-    definition:
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-        name: ghost_nm
-        labels:
-          app: ghost_nm
-  register: namespace
-  until: 'namespace is not failed'
-  delay: 10
-  retries: 3
 
-- name: Create a pod.
+- name: Deploy ghost application.
   k8s:
+    api_version: apps/v1
+    kind: Deployment
+    name: ghost
+    namespace: ghost
     state: present
-    definition:
-      apiVersion: v1
-      kind: Pod
-      metadata:
-        name: '{{ app }}'
-        namespace: ghost_nm
-        labels:
-          app: '{{ app }}'
-      spec:
-        containers:
-          - name: '{{ app }}'
-            image: '{{ image }}'
-            image_pull_policy: Always
+    container:
+      - name: ghost
+        image: ghost:5.14.1
+        ports:
+          - containerPort: 2368
+
+- name: Create Service for Ghost application
+  k8s:
+    api_version: v1
+    kind: Service
+    name: ghost
+    namespace: ghost
+    state: present
+    spec:
+      selector:
+        app: ghost
+      ports:
+        - port: 80
+          target_port: 2368
