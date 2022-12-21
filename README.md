@@ -35,20 +35,16 @@ $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-n
 
 $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
 
-
 ## Run playbooks:
+
 $ ansible-playbook deploy-ghost.yml -i inventory/gcp.yml
 
 $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
-$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_db_volume=true"
-
-$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_ghost_volume=true"
-
-$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "remome_db_volume=true remome_ghost_volume=true"
-
+$ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "delete_data=true"
 
 ## Other commands:
+
 $ kubectl get pods -n <namespace>
 
 $ kubectl exec -it <pod-name> -n <namespace> -- mysql -u root -p

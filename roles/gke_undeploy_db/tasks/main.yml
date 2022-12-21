@@ -3,4 +3,4 @@
 
 - name: Remove Persistent Volume on Database Deployment
   shell: kubectl delete pvc '{{db_pvc_name}}' -n '{{db_namespace}}'
-  when: remome_db_volume == "true"
+  when: delete_data == "true"
