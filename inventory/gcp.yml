@@ -22,6 +22,7 @@ all:
     db_pvc_name: db-pvc
     db_service_name: db-service
     db_port: 3306
+    mysql_root_password: 123iamroot
 
     app_db_name: ghostdb
     app_db_user: ghostuser
@@ -31,3 +32,8 @@ all:
     ghost_namespace: ghost-ns
     ghost_deploy_name: ghost-deployment
     ghost_pvc_name: ghost-pvc
+
+    blogTitle: ascnBlog
+    admin_email: ascn@example.com
+    admin_pass: ascn123
+    admin_name: ascn

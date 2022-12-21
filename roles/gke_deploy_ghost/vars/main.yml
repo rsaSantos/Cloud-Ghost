@@ -1,3 +1,7 @@
 ---
 app: ghost
 image: ghost:5.14.1
+
+ghost_admin_name: ascn 
+ghost_admin_password: \$2a\$10\$/UBGt7yDPkny/WEbFCIBu.rh9jTr4vVkS/mnu3YlErN21QI08kWXW
+ghost_admin_email: ascn@example.com
