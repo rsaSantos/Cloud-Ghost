@@ -63,6 +63,11 @@
             port: '{{ ghost_port }}'
             target_port: '{{ ghost_port }}'
 
+- name: Create Dashboards
+  command: "gcloud monitoring dashboards create --config-from-file=inventory/dashboards/{{item}}"
+  loop: [Memory_Monitoring.json,Monitoring_CPU.json,Monitoring_disk.json,SQL_Monitoring.json]
+ 
+
 - name: Get Database Pod Name
   kubernetes.core.k8s_info:
     kind: Pod
