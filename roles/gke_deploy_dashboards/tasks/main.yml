@@ -1,0 +1,4 @@
+- name: Create Dashboards
+  command: "gcloud monitoring dashboards create --config-from-file=dashboards/{{item}}"
+  ignore_errors: true
+  loop: [Memory_Monitoring.json,Monitoring_CPU.json,Monitoring_disk.json,SQL_Monitoring.json]

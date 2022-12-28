@@ -6,3 +6,5 @@
   roles:
     - gke_undeploy_ghost
     - gke_undeploy_db
+    - gke_undeploy_dashboards
+  
