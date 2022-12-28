@@ -33,7 +33,7 @@
               - name: '{{ app }}'
                 image: '{{ image }}'
                 env: # The variables below could be set on a ConfigMap object
-                  - name: url 
+                  - name: url
                     value: http://{{ ghost_ip }}:{{ ghost_port }}
                   - name: database__connection__host
                     value: '{{ db_service_name }}.{{ db_namespace }}'
@@ -45,19 +45,22 @@
                     value: '{{ app_db_pass }}'
                     url: http://localhost:{{ db_port }}
                   - name: mail__transport
-                    value: "SMTP"
+                    value: 'SMTP'
                   - name: mail__options__service
-                    value: "Mailgun"
+                    value: 'Mailgun'
                   - name: mail__options__host
-                    value: "smtp.mailgun.org"
+                    value: 'smtp.mailgun.org'
                   - name: mail__options__auth__user
-                    value: "postmaster@sandbox767307a48bdd40aeb6e7f140abce8311.mailgun.org"
+                    value: 'postmaster@sandbox767307a48bdd40aeb6e7f140abce8311.mailgun.org'
                   - name: mail__options__auth__pass
-                    value: "8a80006b74173879edcb9f3e517968b0-c2efc90c-06efa2dd"
+                    value: '8a80006b74173879edcb9f3e517968b0-c2efc90c-06efa2dd'
                   - name: mail__options__port
-                    value: "587"
+                    value: '587'
                   - name: tls_rejectUnauthorized
-                    value: "false"
+                    value: 'false'
+                  # Set an ssl version to avoid errors with the mailgun service
+                  - name: env__ssl__version
+                    value: 'TLSv1_3_method'
                 ports:
                   - containerPort: '{{ ghost_port }}'
 
@@ -78,7 +81,6 @@
           - protocol: TCP
             port: '{{ ghost_port }}'
             target_port: '{{ ghost_port }}'
- 
 
 - name: Get Database Pod Name
   kubernetes.core.k8s_info:
@@ -90,6 +92,6 @@
 - name: Change Database to create Admin
   register: change_db
   shell: kubectl exec -it '{{ pod_list.resources[0].metadata.name }}' -n '{{ db_namespace }}' -- mysql -u root --password='{{ mysql_root_password }}' '{{ app_db_name }}' -e "update users set name='{{ ghost_admin_name }}', password='{{ ghost_admin_password }}', email='{{ ghost_admin_email }}', status='active' where id=1;"
-  until: "change_db is not failed"
+  until: 'change_db is not failed'
   retries: 10
   delay: 10
