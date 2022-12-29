@@ -51,12 +51,12 @@
                   - name: mail__options__host
                     value: 'smtp.mailgun.org'
                   - name: mail__options__auth__user
-                    value: 'postmaster@sandbox767307a48bdd40aeb6e7f140abce8311.mailgun.org'
+                    value: 'postmaster@sandboxbebf40c18b394b62abc90aada761939f.mailgun.org'
                   - name: mail__options__auth__pass
                     value: '{{ mailgun_pass }}'
                   - name: mail__options__port
                     value: '587'
-                  - name: tls_rejectUnauthorized
+                  - name: mail__options__secure
                     value: 'false'
                   # Set an ssl version to avoid errors with the mailgun service
                   - name: env__ssl__version

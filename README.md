@@ -37,7 +37,7 @@ $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-n
 
 
 ## Run playbooks:
-$ ansible-playbook deploy-ghost.yml -i inventory/gcp.yml
+$ ansible-playbook --vault-password-file pass.txt deploy-ghost.yml -i inventory/gcp.yml
 
 $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
