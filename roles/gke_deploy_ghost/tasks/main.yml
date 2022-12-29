@@ -53,7 +53,7 @@
                   - name: mail__options__auth__user
                     value: 'postmaster@sandbox767307a48bdd40aeb6e7f140abce8311.mailgun.org'
                   - name: mail__options__auth__pass
-                    value: '8a80006b74173879edcb9f3e517968b0-c2efc90c-06efa2dd'
+                    value: '{{ mailgun_pass }}'
                   - name: mail__options__port
                     value: '587'
                   - name: tls_rejectUnauthorized

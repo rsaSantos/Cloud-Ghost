@@ -43,6 +43,10 @@ $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
 $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "delete_data=true"
 
+
+ansible-playbook --vault-password-file mailgun_keys.yml deploy-ghost.yml -i inventory/gcp.yml
+
+
 ## Other commands:
 $ kubectl get pods -n <namespace>
 
