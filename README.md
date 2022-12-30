@@ -31,8 +31,6 @@ Reminder: Shutdown the cluster when not in use to avoid incurring in costs.
 
 ## Start and Shutdown virtual machines in the cluster:
 
-$ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes <n> --zone europe-southwest1-a
-
 $ gcloud container clusters resize ascn-cluster --node-pool default-pool --num-nodes 0 --zone europe-southwest1-a
 
 
@@ -43,8 +41,7 @@ $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
 $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "delete_data=true"
 
-
-ansible-playbook --vault-password-file mailgun_keys.yml deploy-ghost.yml -i inventory/gcp.yml
+$ ansible-playbook --vault-password-file pass.txt deploy-ghost.yml -i inventory/gcp.yml
 
 
 ## Other commands:

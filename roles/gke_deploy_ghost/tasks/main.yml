@@ -45,13 +45,13 @@
                     value: '{{ app_db_pass }}'
                     url: http://localhost:{{ db_port }}
                   - name: mail__transport
-                    value: 'SMTP'
+                    value: '{{ mail_transport }}'
                   - name: mail__options__service
-                    value: 'Mailgun'
+                    value: '{{ mail_service }}'
                   - name: mail__options__host
-                    value: 'smtp.mailgun.org'
+                    value: '{{ mailgun_host }}'
                   - name: mail__options__auth__user
-                    value: 'postmaster@sandboxbebf40c18b394b62abc90aada761939f.mailgun.org'
+                    value: '{{ mailgun_auth_user }}'
                   - name: mail__options__auth__pass
                     value: '{{ mailgun_pass }}'
                   - name: mail__options__port
