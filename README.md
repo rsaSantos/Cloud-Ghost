@@ -41,10 +41,10 @@ $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml
 
 $ ansible-playbook undeploy-ghost.yml -i inventory/gcp.yml -e "delete_data=true"
 
-$ ansible-playbook --vault-password-file pass.txt deploy-ghost.yml -i inventory/gcp.yml
-
 
 ## Other commands:
 $ kubectl get pods -n <namespace>
 
 $ kubectl exec -it <pod-name> -n <namespace> -- mysql -u root -p
+
+$ ansible-vault encrypt_string --vault-password-file pass.txt '<pass to encrypt>' --name '<name of the variable>' > out.txt 
