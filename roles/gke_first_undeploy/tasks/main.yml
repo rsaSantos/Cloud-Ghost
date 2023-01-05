@@ -1,4 +1,4 @@
-- name: Create a file to track first deployment
+- name: delete the track first deployment file
   file:
     path: "/tmp/first_deployment"
     state: absent
