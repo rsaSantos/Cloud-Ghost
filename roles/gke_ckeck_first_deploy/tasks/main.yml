@@ -1,0 +1,4 @@
+- name: check if first deployment
+  stat:
+    path: "/tmp/first_deployment"
+  register: first_deployment

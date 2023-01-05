@@ -1,5 +1,5 @@
 - name: Create a file to track first deployment
   file:
     path: "/tmp/first_deployment"
-    state: touch
-  when: not first_deployment.stat.exists
+    state: absent
+
