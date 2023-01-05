@@ -7,3 +7,4 @@
     - gke_deploy_db
     - gke_deploy_ghost
     - gke_deploy_dashboards
+    - gke_first_deploy

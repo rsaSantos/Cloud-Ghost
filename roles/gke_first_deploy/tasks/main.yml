@@ -1,0 +1,10 @@
+- name: Create a file to track first deployment
+  file:
+    path: /tmp/first_deployment
+    state: touch
+  when: not ansible_facts['file_exists']['/tmp/first_deployment']
+
+- name: Set first_run variable
+  set_fact:
+    first_run: True
+  when: not ansible_facts['file_exists']['/tmp/first_deployment']
