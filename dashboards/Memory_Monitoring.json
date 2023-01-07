@@ -9,7 +9,7 @@
       {
         "height": 4,
         "widget": {
-          "title": "VM Instance - Memory utilization [MEAN]",
+          "title": "Kubernetes Container - Memory usage [MEAN]",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -27,7 +27,7 @@
                       "crossSeriesReducer": "REDUCE_NONE",
                       "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"agent.googleapis.com/memory/percent_used\" resource.type=\"gce_instance\"",
+                    "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\"",
                     "secondaryAggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
@@ -52,7 +52,7 @@
       {
         "height": 4,
         "widget": {
-          "title": "VM Instance - Memory utilization [MIN]",
+          "title": "Kubernetes Container - Memory usage [MIN]",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -70,7 +70,7 @@
                       "crossSeriesReducer": "REDUCE_NONE",
                       "perSeriesAligner": "ALIGN_MIN"
                     },
-                    "filter": "metric.type=\"agent.googleapis.com/memory/percent_used\" resource.type=\"gce_instance\"",
+                    "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\"",
                     "secondaryAggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
@@ -95,7 +95,7 @@
       {
         "height": 4,
         "widget": {
-          "title": "VM Instance - Memory utilization [MAX]",
+          "title": "Kubernetes Container - Memory usage [MAX]",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -113,7 +113,7 @@
                       "crossSeriesReducer": "REDUCE_NONE",
                       "perSeriesAligner": "ALIGN_MAX"
                     },
-                    "filter": "metric.type=\"agent.googleapis.com/memory/percent_used\" resource.type=\"gce_instance\"",
+                    "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\"",
                     "secondaryAggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",

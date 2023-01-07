@@ -5,7 +5,7 @@
   gather_facts: false
   roles:
     - gke_ckeck_first_deploy
+    - gke_deploy_dashboards
     - gke_deploy_db
     - gke_deploy_ghost
-    - gke_deploy_dashboards
     - gke_first_deploy
