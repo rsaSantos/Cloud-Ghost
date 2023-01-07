@@ -52,7 +52,7 @@
       {
         "height": 4,
         "widget": {
-          "title": "Kubernetes Container - Memory usage [MIN]",
+          "title": "VM Memory Used [MEAN]",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -68,9 +68,9 @@
                     "aggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
-                      "perSeriesAligner": "ALIGN_MIN"
+                      "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\"",
+                    "filter": "metric.type=\"compute.googleapis.com/instance/memory/balloon/ram_used\" resource.type=\"gce_instance\"",
                     "secondaryAggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
@@ -95,7 +95,7 @@
       {
         "height": 4,
         "widget": {
-          "title": "Kubernetes Container - Memory usage [MAX]",
+          "title": "Kubernetes Container - Memory limit utilization [MEAN]",
           "xyChart": {
             "chartOptions": {
               "mode": "COLOR"
@@ -111,9 +111,9 @@
                     "aggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
-                      "perSeriesAligner": "ALIGN_MAX"
+                      "perSeriesAligner": "ALIGN_MEAN"
                     },
-                    "filter": "metric.type=\"kubernetes.io/container/memory/used_bytes\" resource.type=\"k8s_container\"",
+                    "filter": "metric.type=\"kubernetes.io/container/memory/limit_utilization\" resource.type=\"k8s_container\"",
                     "secondaryAggregation": {
                       "alignmentPeriod": "60s",
                       "crossSeriesReducer": "REDUCE_NONE",
