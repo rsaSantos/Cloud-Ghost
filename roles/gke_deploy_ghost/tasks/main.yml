@@ -98,3 +98,22 @@
   until: change_db.stdout == 'name\n{{ ghost_admin_name }}' 
   retries: 10
   delay: 15   
+
+
+- name: Autoscale Pod
+  kubernetes.core.k8s:
+    state: present
+    namespace: '{{ ghost_namespace }}'
+    definition:
+      apiVersion: autoscaling/v1
+      kind: HorizontalPodAutoscaler
+      metadata:
+        name: ghost-hpa
+      spec:
+        scaleTargetRef:
+          apiVersion: apps/v1
+          kind: Deployment
+          name: ghost-deployment
+        minReplicas: 2
+        maxReplicas: 5
+        targetCPUUtilizationPercentage: 75
