@@ -1,3 +1,4 @@
 - name: Delete Dashboards
   command: "gcloud monitoring dashboards delete projects/40609452147/dashboards/{{item}} --quiet"
   loop: ["{{Memory_Monitoring}}","{{Monitoring_CPU}}","{{Monitoring_disk}}"]
+  ignore_errors: true
