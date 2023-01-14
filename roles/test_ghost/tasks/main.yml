@@ -26,3 +26,29 @@
   until: result.status == 200
   retries: 3
   delay: 5
+
+- name: Test 10
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_get_10_25.jmx -l jmeter/jmeter_tests/test_output_10_25.out"
+  async: 40
+  poll: 1
+  ignore_errors: true
+
+- name: Pause for 10 seconds before next Test
+  pause:
+    seconds: 10
+
+- name: Test 100
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_get_100_30.jmx -l jmeter/jmeter_tests/test_output_100_30.out"
+  async: 500
+  poll: 5
+  ignore_errors: true
+
+- name: Pause for 10 seconds before next Test
+  pause:
+    seconds: 10
+
+- name: Test 1000
+  shell: "./jmeter/bin/jmeter -n -t jmeter/jmeter_tests/Test_get_1000_50.jmx -l jmeter/jmeter_tests/test_output_1000_50.out"
+  async: 5000
+  poll: 50
+  ignore_errors: true
