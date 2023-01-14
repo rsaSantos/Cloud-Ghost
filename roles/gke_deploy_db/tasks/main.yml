@@ -77,7 +77,7 @@
         name: '{{ db_service_name }}'
         namespace: '{{ db_namespace }}'
       spec:
-        type: LoadBalancer
+        type: LoadBalancer # Use cluster ip for isolation and prevent outside access.
         selector:
           app: '{{ app }}'
         ports:
