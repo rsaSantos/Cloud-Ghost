@@ -3,9 +3,23 @@
 - name: Refresh inventory
   meta: refresh_inventory
 
+- name: Check if the database is running
+  shell: kubectl exec -it '{{ pod_list.resources[0].metadata.name }}' -n '{{ db_namespace }}' -- bash -c "mysqladmin -u root -p{{ mysql_root_password }} ping"
+  register: db_status
+  until: db_status.stdout == "mysqld is alive"
+  retries: 3
+  delay: 5
+
+- name: Check if database has required admin changes
+  shell: kubectl exec -it '{{ pod_list.resources[0].metadata.name }}' -n '{{ db_namespace }}' -- mysql -u root --password='{{ mysql_root_password }}' '{{ app_db_name }}' -e "select name from users where id=1;"
+  register: db_changes
+  until: change_db.stdout == 'name\n'+ghost_admin_name 
+  retries: 3
+  delay: 5  
+
 - name: Check that you can connect (GET) to Ghost and it returns a status 200
   ansible.builtin.uri:
-    url: "http://{{ ghost_ip }}:{{ghost_port}}/"
+    url: "http://{{ ghost_ip }}:{{externel_port}}/"
     method: GET
     status_code: 200
   register: result

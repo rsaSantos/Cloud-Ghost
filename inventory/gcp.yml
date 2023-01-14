@@ -42,6 +42,7 @@ all:
           3832
 
     # Ghost variables
+    ghost_admin_name: ascn
     ghost_namespace: ghost-ns
     ghost_deploy_name: ghost-deployment
     ghost_pvc_name: ghost-pvc

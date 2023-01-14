@@ -2,7 +2,6 @@
 app: ghost
 image: ghost:5.14.1
 
-ghost_admin_name: ascn 
 ghost_admin_password: !vault |
           $ANSIBLE_VAULT;1.1;AES256
           63646431366264363933356634613637643961646530356635336165613235656338336364626361

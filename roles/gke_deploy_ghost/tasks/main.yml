@@ -90,12 +90,11 @@
   register: pod_list
 
 - name: Change Database to create Admin
-  shell: 
   register: change_db
   shell: |
     kubectl exec -it '{{ pod_list.resources[0].metadata.name }}' -n '{{ db_namespace }}' -- mysql -u root --password='{{ mysql_root_password }}' '{{ app_db_name }}' -e "update users set name='{{ ghost_admin_name }}', password='{{ ghost_admin_password }}', email='{{ ghost_admin_email }}', status='active' where id=1;"
     kubectl exec -it '{{ pod_list.resources[0].metadata.name }}' -n '{{ db_namespace }}' -- mysql -u root --password='{{ mysql_root_password }}' '{{ app_db_name }}' -e "select name from users where id=1;"
-  until: change_db.stdout == 'name\n{{ ghost_admin_name }}' 
+  until: change_db.stdout == 'name\n'+ghost_admin_name 
   retries: 10
   delay: 15   
 
