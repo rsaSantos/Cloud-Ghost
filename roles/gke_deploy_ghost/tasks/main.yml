@@ -34,7 +34,7 @@
                 image: '{{ image }}'
                 env: # The variables below could be set on a ConfigMap object
                   - name: url
-                    value: http://{{ ghost_ip }}:{{ ghost_port }}
+                    value: http://{{ ghost_ip }}:{{ externel_port }}
                   - name: database__connection__host
                     value: '{{ db_service_name }}.{{ db_namespace }}'
                   - name: database__connection__database
@@ -76,10 +76,10 @@
       spec:
         type: LoadBalancer
         selector:
-          app: ghost
+          app: '{{ app }}'
         ports:
           - protocol: TCP
-            port: '{{ ghost_port }}'
+            port: '{{ externel_port }}'
             target_port: '{{ ghost_port }}'
 
 - name: Get Database Pod Name

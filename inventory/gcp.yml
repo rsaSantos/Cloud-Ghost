@@ -15,6 +15,7 @@ all:
     # APP variables
     ghost_ip: 34.175.205.231 # Needs to be updated
     ghost_port: 2368
+    externel_port: 80
 
     # Database variables
     db_namespace: db-ns
